@@ -43,7 +43,6 @@ app.use((req, res, next) => {
 
 // Inicialização do banco de dados e o servidor
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT = 3000, () => {
-    console.log(`Servidor rodando na porta http://localhost:${PORT}`);
-  });
+ const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
 });
