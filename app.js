@@ -21,7 +21,7 @@ const artistaRoutes = require('./routes/artistaRoutes');
 const discoRoutes = require('./routes/discoRoutes');
 const faixaRoutes = require('./routes/faixaRoutes');
 const generoRoutes = require('./routes/generoRoutes');
-const vincularArtistaRoutes = require('./routes/vincularArtistaRoutes')
+const vincularArtistaRoutes = require('./routes/vincularArtistaRoutes');
 
 // Definindo as rotas principais
 app.use('/', homeRoutes);
@@ -29,10 +29,11 @@ app.use('/artistas', artistaRoutes);
 app.use('/discos', discoRoutes);
 app.use('/faixas', faixaRoutes);
 app.use('/generos', generoRoutes);
-app.use('/vincular-artista', vincularArtistaRoutes)
+app.use('/vincular-artista', vincularArtistaRoutes);
 
 // Serve os arquivos estáticos do frontend (caso haja)
 app.use(express.static(path.join(__dirname, 'public')));
+
 // Servindo imagens como arquivos estáticos
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
@@ -41,8 +42,10 @@ app.use((req, res, next) => {
   res.status(404).send('Página não encontrada!');
 });
 
-// Inicialização do banco de dados e o servidor
+// Inicialização do banco de dados e do servidor
 sequelize.sync({ force: false }).then(() => {
- const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+  });
 });
